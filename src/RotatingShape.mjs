@@ -19,6 +19,11 @@ export class RotatingShape {
         }
         return new RotatingShape(newGrid);
     }
+
+    rotateLeft() {
+        return this.rotateRight().rotateRight().rotateRight();
+    }
+    
     toString() {
         return this.grid.map(row => row.join("")).join("\n") + "\n";
     }
