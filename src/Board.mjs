@@ -26,6 +26,13 @@ export class Board {
   tick() {
     for (let row = this.height - 1; row > 0; row--) {
       for (let column = 0; column < this.width; column++) {
+
+        if (this.positions[row][column] === this.falling) {
+          if (row === this.height - 1) {
+            this.falling = null;
+            continue;
+          }
+        }
         this.positions[row][column] = this.positions[row - 1][column];
       }
     }
