@@ -11,7 +11,7 @@ export class Board {
   }
 
   hasFalling() {
-    return this.falling;
+    return this.falling !== null;
   }
 
   drop(block) {
