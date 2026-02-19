@@ -20,7 +20,6 @@ export class Board {
     }
      const middleIdx = Math.floor(this.width / 2);
      this.positions[0][middleIdx] = block;
-     this.falling = block;
      this.falling2 = { row: 0, column: middleIdx, block };
   }
 
