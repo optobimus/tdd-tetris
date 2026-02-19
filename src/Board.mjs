@@ -30,6 +30,12 @@ export class Board {
       this.falling = null;
       return;
     }
+
+    if (this.positions[row + 1][column] !== ".") {
+      this.falling = null;
+      return;
+    }
+
     const block = this.positions[row][column];
     this.positions[row][column] = ".";
     this.positions[row + 1][column] = block;
