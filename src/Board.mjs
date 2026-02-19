@@ -14,6 +14,15 @@ export class Board {
      this.positions[0][middleIdx] = block;
   }
 
+  tick() {
+    for (let row = this.height - 1; row > 0; row--) {
+      for (let column = 0; column < this.width; column++) {
+        this.positions[row][column] = this.positions[row - 1][column];
+      }
+    }
+    this.positions[0].fill(".");
+  }
+
   toString() {
     let result = "";
     for (let row = 0; row < this.height; row++) {
