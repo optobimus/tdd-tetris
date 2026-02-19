@@ -2,7 +2,6 @@ export class Board {
   width;
   height;
   positions = [];
-  falling = null;
   falling2 = null;
 
   constructor(width, height) {
