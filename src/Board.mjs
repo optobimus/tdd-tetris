@@ -2,7 +2,7 @@ export class Board {
   width;
   height;
   positions = [];
-  falling2 = null;
+  falling = null;
 
   constructor(width, height) {
     this.width = width;
@@ -11,7 +11,7 @@ export class Board {
   }
 
   hasFalling() {
-    return this.falling2 !== null;
+    return this.falling !== null;
   }
 
   drop(block) {
@@ -20,20 +20,20 @@ export class Board {
     }
      const middleIdx = Math.floor(this.width / 2);
      this.positions[0][middleIdx] = block;
-     this.falling2 = { row: 0, column: middleIdx, block };
+     this.falling = { row: 0, column: middleIdx, block };
   }
 
   tick() {
-    const { row, column } = this.falling2;
+    const { row, column } = this.falling;
 
     if (row === this.height - 1) {
-      this.falling2 = null;
+      this.falling = null;
       return;
     }
     const block = this.positions[row][column];
     this.positions[row][column] = ".";
     this.positions[row + 1][column] = block;
-    this.falling2 = { row: row + 1, column };
+    this.falling = { row: row + 1, column };
   }
 
   toString() {
