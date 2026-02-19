@@ -2,6 +2,7 @@ export class Board {
   width;
   height;
   positions = [];
+  falling = null;
 
   constructor(width, height) {
     this.width = width;
@@ -9,9 +10,17 @@ export class Board {
     this.positions = Array.from({ length: height }, () => Array(width).fill("."));
   }
 
+  hasFalling() {
+    return this.falling;
+  }
+
   drop(block) {
+    if (this.hasFalling()) {
+      throw new Error("already falling");
+    }
      const middleIdx = Math.floor(this.width / 2);
      this.positions[0][middleIdx] = block;
+     this.falling = block;
   }
 
   tick() {
