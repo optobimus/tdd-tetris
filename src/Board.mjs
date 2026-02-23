@@ -45,6 +45,10 @@ export class Board {
     if (canMove) this.falling = { topRow, leftCol: leftCol - 1, shape };
   }
 
+  moveDown() {
+    this.tick();
+  }
+
   moveRight() {
     const { topRow, leftCol, shape } = this.falling;
     const canMove = this.#occupiedCells(shape).every(
