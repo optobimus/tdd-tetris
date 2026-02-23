@@ -20,11 +20,5 @@ export class Tetromino {
 
     static T_SHAPE = new Tetromino([`.T.\nTTT\n...`, `.T.\n.TT\n.T.`, `...\nTTT\n.T.`, `.T.\nTT.\n.T.`]);
 
-    static I_SHAPE = RotatingShape.fromString(
-        `.....
-         .....
-         IIII.
-         .....
-         .....`
-    );
+    static I_SHAPE = new Tetromino([`.....\n.....\nIIII.\n.....\n.....`, `..I..\n..I..\n..I..\n..I..\n.....`]);
 }
