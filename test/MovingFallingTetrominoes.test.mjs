@@ -48,4 +48,56 @@ describe("Moving falling tetrominoes", () => {
        ..........`
     );
   });
+
+  test("it cannot be moved left beyond the board", () => {
+    board.moveLeft();
+    board.moveLeft();
+    board.moveLeft();
+    board.moveLeft();
+
+    expect(board.toString()).to.equalShape(
+      `.T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  test("it cannot be moved right beyond the board", () => {
+    board.moveRight();
+    board.moveRight();
+    board.moveRight();
+    board.moveRight();
+    board.moveRight();
+    board.moveRight();
+
+    expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  test("it cannot be moved down beyond the board (will stop falling)", () => {
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....T.....
+       ...TTT....`
+    );
+    expect(board.hasFalling()).to.be.false;
+  });
 });
