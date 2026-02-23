@@ -26,26 +26,18 @@ export class Board {
     }
 
     const leftCol = Math.floor((this.width - block.width) / 2);
-    this.positions[0][leftCol] = block.cellAt(0, 0);
     this.falling = { topRow: 0, leftCol, shape: block };
   }
 
   tick() {
     const { topRow, leftCol, shape } = this.falling;
 
-    if (topRow === this.height - 1) {
+    if (topRow === this.height - 1 || this.positions[topRow + 1][leftCol] !== ".") {
+      this.positions[topRow][leftCol] = shape.cellAt(0, 0);
       this.falling = null;
       return;
     }
 
-    if (this.positions[topRow + 1][leftCol] !== ".") {
-      this.falling = null;
-      return;
-    }
-
-    const char = this.positions[topRow][leftCol];
-    this.positions[topRow][leftCol] = ".";
-    this.positions[topRow + 1][leftCol] = char;
     this.falling = { topRow: topRow + 1, leftCol, shape };
   }
   cellAt(row, col) {
