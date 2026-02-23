@@ -48,12 +48,19 @@ export class Board {
     this.positions[topRow + 1][leftCol] = char;
     this.falling = { topRow: topRow + 1, leftCol, shape };
   }
-
+  cellAt(row, col) {
+    if (this.falling) {
+      const { topRow, leftCol, shape } = this.falling;
+      const r = row - topRow, c = col - leftCol;
+      if (r >= 0 && r < shape.height && c >= 0 && c < shape.width && shape.cellAt(r, c) !== ".") {
+        return shape.cellAt(r, c);
+      }
+    } return this.positions[row][col]; }
   toString() {
     let result = "";
     for (let row = 0; row < this.height; row++) {
-      for (let column = 0; column < this.width; column++) {
-        result += this.positions[row][column];
+      for (let col = 0; col < this.width; col++) {
+        result += this.cellAt(row, col);
       }
       result += "\n";
     }
