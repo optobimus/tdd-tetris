@@ -1,3 +1,5 @@
+import { Block } from "./Block.mjs";
+
 export class Board {
   width;
   height;
@@ -18,9 +20,14 @@ export class Board {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
-     const middleIdx = Math.floor(this.width / 2);
-     this.positions[0][middleIdx] = block;
-     this.falling = { row: 0, column: middleIdx, block };
+
+    if (typeof block === "string") {
+      block = new Block(block);
+    }
+
+    const middleIdx = Math.floor(this.width / 2);
+    this.positions[0][middleIdx] = block.cellAt(0, 0);
+    this.falling = { row: 0, column: middleIdx, block };
   }
 
   tick() {
