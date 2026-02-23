@@ -31,11 +31,12 @@ export class Board {
 
   tick() {
     const { topRow, leftCol, shape } = this.falling;
-    const cells = Array.from({ length: shape.height }, (_, r) =>
-      Array.from({ length: shape.width }, (_, c) => [r, c])
-    ).flat().filter(([r, c]) => shape.cellAt(r, c) !== ".");
-    const blocked = cells.some(([r, c]) =>
-      topRow + r === this.height - 1 || this.positions[topRow + r + 1][leftCol + c] !== ".");
+    const cells = Array.from({ length: shape.height }, (_, r) => Array.from({ length: shape.width }, (_, c) => [r, c]))
+      .flat()
+      .filter(([r, c]) => shape.cellAt(r, c) !== ".");
+    const blocked = cells.some(
+      ([r, c]) => topRow + r === this.height - 1 || this.positions[topRow + r + 1][leftCol + c] !== "."
+    );
     if (blocked) {
       cells.forEach(([r, c]) => (this.positions[topRow + r][leftCol + c] = shape.cellAt(r, c)));
       this.falling = null;
@@ -43,14 +44,19 @@ export class Board {
       this.falling = { topRow: topRow + 1, leftCol, shape };
     }
   }
+
   cellAt(row, col) {
     if (this.falling) {
       const { topRow, leftCol, shape } = this.falling;
-      const r = row - topRow, c = col - leftCol;
+      const r = row - topRow,
+        c = col - leftCol;
       if (r >= 0 && r < shape.height && c >= 0 && c < shape.width && shape.cellAt(r, c) !== ".") {
         return shape.cellAt(r, c);
       }
-    } return this.positions[row][col]; }
+    }
+    return this.positions[row][col];
+  }
+  
   toString() {
     let result = "";
     for (let row = 0; row < this.height; row++) {
@@ -61,5 +67,4 @@ export class Board {
     }
     return result;
   }
-
 }
