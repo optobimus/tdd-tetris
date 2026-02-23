@@ -35,4 +35,16 @@ describe("Rotating falling tetrominoes", () => {
        ..........`
     );
   });
+
+  test("it cannot be rotated when there is no room", () => {
+    board = new Board(10, 3);
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..IIII....`
+    );
+  });
 });
