@@ -30,6 +30,8 @@ export class Board {
   }
 
   tick() {
+    if (!this.falling) return;
+
     const { topRow, leftCol, shape } = this.falling;
     const cells = Array.from({ length: shape.height }, (_, r) => Array.from({ length: shape.width }, (_, c) => [r, c]))
       .flat()
@@ -37,6 +39,7 @@ export class Board {
     const blocked = cells.some(
       ([r, c]) => topRow + r === this.height - 1 || this.positions[topRow + r + 1][leftCol + c] !== "."
     );
+
     if (blocked) {
       cells.forEach(([r, c]) => (this.positions[topRow + r][leftCol + c] = shape.cellAt(r, c)));
       this.falling = null;
@@ -54,9 +57,10 @@ export class Board {
         return shape.cellAt(r, c);
       }
     }
+    
     return this.positions[row][col];
   }
-  
+
   toString() {
     let result = "";
     for (let row = 0; row < this.height; row++) {
