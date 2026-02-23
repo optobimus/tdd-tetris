@@ -45,6 +45,15 @@ export class Board {
     if (canMove) this.falling = { topRow, leftCol: leftCol - 1, shape };
   }
 
+  rotateRight() {
+    const { topRow, leftCol, shape } = this.falling;
+    const rotated = shape.rotateRight();
+    const fits = this.#occupiedCells(rotated).every(
+      ([r, c]) => topRow + r < this.height && leftCol + c >= 0 && leftCol + c < this.width && this.positions[topRow + r][leftCol + c] === "."
+    );
+    if (fits) this.falling = { topRow, leftCol, shape: rotated };
+  }
+
   moveDown() {
     this.tick();
   }
