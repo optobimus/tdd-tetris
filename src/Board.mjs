@@ -29,13 +29,19 @@ export class Board {
     this.falling = { topRow: 0, leftCol, shape: block };
   }
 
+  #occupiedCells(shape) {
+    const cells = [];
+    for (let r = 0; r < shape.height; r++)
+      for (let c = 0; c < shape.width; c++)
+        if (shape.cellAt(r, c) !== ".") cells.push([r, c]);
+    return cells;
+  }
+
   tick() {
     if (!this.falling) return;
 
     const { topRow, leftCol, shape } = this.falling;
-    const cells = Array.from({ length: shape.height }, (_, r) => Array.from({ length: shape.width }, (_, c) => [r, c]))
-      .flat()
-      .filter(([r, c]) => shape.cellAt(r, c) !== ".");
+    const cells = this.#occupiedCells(shape);
     const blocked = cells.some(
       ([r, c]) => topRow + r === this.height - 1 || this.positions[topRow + r + 1][leftCol + c] !== "."
     );
