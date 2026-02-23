@@ -47,4 +47,22 @@ describe("Rotating falling tetrominoes", () => {
        ..IIII....`
     );
   });
+
+  test("wall kick: rotating near the right wall moves the piece left", () => {
+    board = new Board(10, 6);
+    board.drop(Tetromino.I_SHAPE);
+    for (let i = 0; i < 10; i++) board.moveRight();
+    board.rotateRight();
+    for (let i = 0; i < 10; i++) board.moveRight();
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ......IIII
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });

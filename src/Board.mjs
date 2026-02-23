@@ -45,13 +45,15 @@ export class Board {
     if (canMove) this.falling = { topRow, leftCol: leftCol - 1, shape };
   }
 
-  rotateRight() {
-    const { topRow, leftCol, shape } = this.falling;
-    const rotated = shape.rotateRight();
-    const fits = this.#occupiedCells(rotated).every(
-      ([r, c]) => topRow + r < this.height && leftCol + c >= 0 && leftCol + c < this.width && this.positions[topRow + r][leftCol + c] === "."
-    );
-    if (fits) this.falling = { topRow, leftCol, shape: rotated };
+  #applyRotation(rotated) {
+    const { topRow, leftCol } = this.falling;
+    for (const col of [0, -1, 1, -2, 2].map((o) => leftCol + o))
+      if (this.#occupiedCells(rotated).every(([r, c]) => topRow + r < this.height && col + c >= 0 && col + c < this.width && this.positions[topRow + r][col + c] === "."))
+        return void (this.falling = { topRow, leftCol: col, shape: rotated });
+  }
+
+  rotateRight() { 
+    this.#applyRotation(this.falling.shape.rotateRight()); 
   }
 
   rotateLeft() {
