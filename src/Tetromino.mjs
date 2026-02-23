@@ -11,9 +11,19 @@ export class Tetromino {
     rotateRight() {
         return new Tetromino(this.#orientations, (this.#currentIndex + 1) % this.#orientations.length);
     }
+
     rotateLeft() {
         return new Tetromino(this.#orientations, (this.#currentIndex - 1 + this.#orientations.length) % this.#orientations.length);
     }
+
+    get width() {
+        return this.#orientations[this.#currentIndex].grid[0].length; 
+    }
+    get height() { 
+        return this.#orientations[this.#currentIndex].grid.length; 
+    }
+    cellAt(row, col) { return this.#orientations[this.#currentIndex].grid[row][col]; }
+
     toString() {
         return this.#orientations[this.#currentIndex].toString();
     }
