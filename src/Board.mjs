@@ -32,8 +32,7 @@ export class Board {
   #occupiedCells(shape) {
     const cells = [];
     for (let r = 0; r < shape.height; r++)
-      for (let c = 0; c < shape.width; c++)
-        if (shape.cellAt(r, c) !== ".") cells.push([r, c]);
+      for (let c = 0; c < shape.width; c++) if (shape.cellAt(r, c) !== ".") cells.push([r, c]);
     return cells;
   }
 
@@ -48,16 +47,24 @@ export class Board {
   #applyRotation(rotated) {
     const { topRow, leftCol } = this.falling;
     for (const col of [0, -1, 1, -2, 2].map((o) => leftCol + o))
-      if (this.#occupiedCells(rotated).every(([r, c]) => topRow + r < this.height && col + c >= 0 && col + c < this.width && this.positions[topRow + r][col + c] === "."))
+      if (
+        this.#occupiedCells(rotated).every(
+          ([r, c]) =>
+            topRow + r < this.height &&
+            col + c >= 0 &&
+            col + c < this.width &&
+            this.positions[topRow + r][col + c] === "."
+        )
+      )
         return void (this.falling = { topRow, leftCol: col, shape: rotated });
   }
 
-  rotateRight() { 
-    this.#applyRotation(this.falling.shape.rotateRight()); 
+  rotateRight() {
+    this.#applyRotation(this.falling.shape.rotateRight());
   }
 
-  rotateLeft() { 
-    this.#applyRotation(this.falling.shape.rotateLeft()); 
+  rotateLeft() {
+    this.#applyRotation(this.falling.shape.rotateLeft());
   }
 
   moveDown() {
@@ -98,7 +105,7 @@ export class Board {
         return shape.cellAt(r, c);
       }
     }
-    
+
     return this.positions[row][col];
   }
 

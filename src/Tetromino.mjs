@@ -37,9 +37,9 @@ export class Tetromino {
 
   static I_SHAPE = new Tetromino([`.....\n.....\nIIII.\n.....\n.....`, `..I..\n..I..\n..I..\n..I..\n.....`]);
 
-    static O_SHAPE = new Tetromino([`.OO\n.OO\n...`]);
-    static L_SHAPE = new Tetromino([`..L\nLLL\n...`, `.L.\n.L.\n.LL`, `...\nLLL\nL..`, `LL.\n.L.\n.L.`]);
-    static J_SHAPE = new Tetromino([`J..\nJJJ\n...`, `.JJ\n.J.\n.J.`, `...\nJJJ\n..J`, `.J.\n.J.\nJJ.`]);
-    static S_SHAPE = new Tetromino([`.SS\nSS.\n...`, `S..\nSS.\n.S.`]);
-    static Z_SHAPE = new Tetromino([`ZZ.\n.ZZ\n...`, `.Z.\nZZ.\nZ..`]);
+  static O_SHAPE = new Tetromino([`.OO\n.OO\n...`]);
+  static L_SHAPE = new Tetromino([`..L\nLLL\n...`, `.L.\n.L.\n.LL`, `...\nLLL\nL..`, `LL.\n.L.\n.L.`]);
+  static J_SHAPE = new Tetromino([`J..\nJJJ\n...`, `.JJ\n.J.\n.J.`, `...\nJJJ\n..J`, `.J.\n.J.\nJJ.`]);
+  static S_SHAPE = new Tetromino([`.SS\nSS.\n...`, `S..\nSS.\n.S.`]);
+  static Z_SHAPE = new Tetromino([`ZZ.\n.ZZ\n...`, `.Z.\nZZ.\nZ..`]);
 }
