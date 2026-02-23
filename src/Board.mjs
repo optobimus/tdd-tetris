@@ -31,14 +31,17 @@ export class Board {
 
   tick() {
     const { topRow, leftCol, shape } = this.falling;
-
-    if (topRow === this.height - 1 || this.positions[topRow + 1][leftCol] !== ".") {
-      this.positions[topRow][leftCol] = shape.cellAt(0, 0);
+    const cells = Array.from({ length: shape.height }, (_, r) =>
+      Array.from({ length: shape.width }, (_, c) => [r, c])
+    ).flat().filter(([r, c]) => shape.cellAt(r, c) !== ".");
+    const blocked = cells.some(([r, c]) =>
+      topRow + r === this.height - 1 || this.positions[topRow + r + 1][leftCol + c] !== ".");
+    if (blocked) {
+      cells.forEach(([r, c]) => (this.positions[topRow + r][leftCol + c] = shape.cellAt(r, c)));
       this.falling = null;
-      return;
+    } else {
+      this.falling = { topRow: topRow + 1, leftCol, shape };
     }
-
-    this.falling = { topRow: topRow + 1, leftCol, shape };
   }
   cellAt(row, col) {
     if (this.falling) {
