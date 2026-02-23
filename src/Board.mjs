@@ -25,28 +25,28 @@ export class Board {
       block = new Block(block);
     }
 
-    const middleIdx = Math.floor(this.width / 2);
-    this.positions[0][middleIdx] = block.cellAt(0, 0);
-    this.falling = { row: 0, column: middleIdx, block };
+    const leftCol = Math.floor((this.width - block.width) / 2);
+    this.positions[0][leftCol] = block.cellAt(0, 0);
+    this.falling = { topRow: 0, leftCol, shape: block };
   }
 
   tick() {
-    const { row, column } = this.falling;
+    const { topRow, leftCol, shape } = this.falling;
 
-    if (row === this.height - 1) {
+    if (topRow === this.height - 1) {
       this.falling = null;
       return;
     }
 
-    if (this.positions[row + 1][column] !== ".") {
+    if (this.positions[topRow + 1][leftCol] !== ".") {
       this.falling = null;
       return;
     }
 
-    const block = this.positions[row][column];
-    this.positions[row][column] = ".";
-    this.positions[row + 1][column] = block;
-    this.falling = { row: row + 1, column };
+    const char = this.positions[topRow][leftCol];
+    this.positions[topRow][leftCol] = ".";
+    this.positions[topRow + 1][leftCol] = char;
+    this.falling = { topRow: topRow + 1, leftCol, shape };
   }
 
   toString() {
