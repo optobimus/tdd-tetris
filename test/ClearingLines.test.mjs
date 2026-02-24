@@ -26,6 +26,21 @@ describe("Clearing lines", () => {
     );
   });
 
+  test("an incomplete row is not cleared", () => {
+    board.drop("X");
+    board.moveLeft();
+    board.tick(); board.tick(); board.tick(); board.tick();
+    board.drop("X");
+    board.tick(); board.tick(); board.tick(); board.tick();
+
+    expect(board.toString()).to.equalShape(
+      `...
+       ...
+       ...
+       XX.`
+    );
+  });
+
   test("rows above a cleared line shift down", () => {
     board.drop("X");
     board.moveLeft();
