@@ -23,9 +23,24 @@ describe("Scoring", () => {
       expect(scoring.score).to.equal(0);
     });
 
-    test("clearing one line scores points", () => {
+    test("clearing 1 line scores 40", () => {
       scoring.linesCleared(1);
-      expect(scoring.score).to.be.greaterThan(0);
+      expect(scoring.score).to.equal(40);
+    });
+
+    test("clearing 2 lines scores 100", () => {
+      scoring.linesCleared(2);
+      expect(scoring.score).to.equal(100);
+    });
+
+    test("clearing 3 lines scores 300", () => {
+      scoring.linesCleared(3);
+      expect(scoring.score).to.equal(300);
+    });
+
+    test("clearing 4 lines scores 1200", () => {
+      scoring.linesCleared(4);
+      expect(scoring.score).to.equal(1200);
     });
   });
 
