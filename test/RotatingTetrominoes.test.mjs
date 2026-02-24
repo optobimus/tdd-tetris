@@ -117,6 +117,38 @@ describe("The O shape", () => {
   });
 });
 
+describe("The L shape", () => {
+  const shape = Tetromino.L_SHAPE;
+
+  test("initial orientation", () => {
+    expect(shape.toString()).to.equalShape(`..L\nLLL\n...`);
+  });
+
+  test("can be rotated right", () => {
+    expect(shape.rotateRight().toString()).to.equalShape(`.L.\n.L.\n.LL`);
+  });
+
+  test("has 4 distinct orientations", () => {
+    expect(distinctOrientations(shape).size).to.equal(4);
+  });
+});
+
+describe("The J shape", () => {
+  const shape = Tetromino.J_SHAPE;
+
+  test("initial orientation", () => {
+    expect(shape.toString()).to.equalShape(`J..\nJJJ\n...`);
+  });
+
+  test("can be rotated right", () => {
+    expect(shape.rotateRight().toString()).to.equalShape(`.JJ\n.J.\n.J.`);
+  });
+
+  test("has 4 distinct orientations", () => {
+    expect(distinctOrientations(shape).size).to.equal(4);
+  });
+});
+
 describe("The Z shape", () => {
   const shape = Tetromino.Z_SHAPE;
 
