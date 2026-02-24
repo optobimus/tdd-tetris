@@ -97,10 +97,15 @@ export class Board {
     }
   }
 
+  onClearLine = null;
+
   #clearLines() {
     const remaining = this.positions.filter((row) => row.some((cell) => cell === "."));
     const cleared = this.height - remaining.length;
-    this.positions = [...Array.from({ length: cleared }, () => Array(this.width).fill(".")), ...remaining];
+    if (cleared > 0) {
+      this.positions = [...Array.from({ length: cleared }, () => Array(this.width).fill(".")), ...remaining];
+      this.onClearLine?.(cleared);
+    }
   }
 
   cellAt(row, col) {
