@@ -42,6 +42,22 @@ describe("Scoring", () => {
       scoring.linesCleared(4);
       expect(scoring.score).to.equal(1200);
     });
+
+    test("level starts at 1", () => {
+      expect(scoring.level).to.equal(1);
+    });
+
+    test("level increases after 10 lines", () => {
+      for (let i = 0; i < 10; i++) scoring.linesCleared(1);
+      expect(scoring.level).to.equal(2);
+    });
+
+    test("higher level multiplies score", () => {
+      for (let i = 0; i < 10; i++) scoring.linesCleared(1);
+      const scoreBefore = scoring.score;
+      scoring.linesCleared(1);
+      expect(scoring.score - scoreBefore).to.equal(40 * 2);
+    });
   });
 
   describe("Board notifies observer", () => {
