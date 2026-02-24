@@ -91,9 +91,16 @@ export class Board {
     if (blocked) {
       cells.forEach(([r, c]) => (this.positions[topRow + r][leftCol + c] = shape.cellAt(r, c)));
       this.falling = null;
+      this.#clearLines();
     } else {
       this.falling = { topRow: topRow + 1, leftCol, shape };
     }
+  }
+
+  #clearLines() {
+    const remaining = this.positions.filter((row) => row.some((cell) => cell === "."));
+    const cleared = this.height - remaining.length;
+    this.positions = [...Array.from({ length: cleared }, () => Array(this.width).fill(".")), ...remaining];
   }
 
   cellAt(row, col) {
