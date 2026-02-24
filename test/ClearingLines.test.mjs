@@ -1,6 +1,7 @@
 import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
+import { Tetromino } from "../src/Tetromino.mjs";
 
 describe("Clearing lines", () => {
   let board;
@@ -38,6 +39,23 @@ describe("Clearing lines", () => {
        ...
        ...
        XX.`
+    );
+  });
+
+  test("multiple full rows are cleared at once", () => {
+    board = new Board(4, 4);
+    board.drop("X"); board.moveLeft(); board.tick(); board.tick(); board.tick(); board.tick();
+    board.drop("X"); board.moveRight(); board.moveRight(); board.tick(); board.tick(); board.tick(); board.tick();
+    board.drop("X"); board.moveLeft(); board.tick(); board.tick(); board.tick();
+    board.drop("X"); board.moveRight(); board.moveRight(); board.tick(); board.tick(); board.tick();
+    board.drop(Tetromino.O_SHAPE);
+    board.tick(); board.tick(); board.tick();
+
+    expect(board.toString()).to.equalShape(
+      `....
+       ....
+       ....
+       ....`
     );
   });
 
