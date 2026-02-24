@@ -26,16 +26,7 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    const lastRow = this.grid[this.grid.length - 1];
-    const originalLastRowEmpty = lastRow.every((cell) => cell === ".");
-    let result = this.rotateRight().rotateRight().rotateRight();
-    if (originalLastRowEmpty) {
-      while (result.grid.length > 0 && result.grid[0].every((cell) => cell === ".")) {
-        const emptyRow = result.grid[0].map(() => ".");
-        result = new RotatingShape([...result.grid.slice(1), emptyRow]);
-      }
-    }
-    return result;
+    return this.rotateRight().rotateRight().rotateRight();
   }
 
   toString() {
