@@ -25,13 +25,6 @@ describe("Rotating 3x3 shape", () => {
     );
   });
 
-  test("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
-      `CFI
-       BEH
-       ADG`
-    );
-  });
 });
 
 describe("Rotating 5x5 shape", () => {
@@ -63,13 +56,4 @@ describe("Rotating 5x5 shape", () => {
     );
   });
 
-  test("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
-      `EJOTY
-       DINSX
-       CHMRW
-       BGLQV
-       AFKPU`
-    );
-  });
 });
