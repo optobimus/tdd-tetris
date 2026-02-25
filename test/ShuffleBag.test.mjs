@@ -13,4 +13,9 @@ describe("ShuffleBag", () => {
       expect([1, 2, 3]).to.include(bag.next());
     }
   });
+
+  test("each item appears exactly once before the bag refills", () => {
+    const firstRound = [bag.next(), bag.next(), bag.next()];
+    expect(firstRound.sort()).to.deep.equal([1, 2, 3]);
+  });
 });
