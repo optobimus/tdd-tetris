@@ -18,4 +18,10 @@ describe("ShuffleBag", () => {
     const firstRound = [bag.next(), bag.next(), bag.next()];
     expect(firstRound.sort()).to.deep.equal([1, 2, 3]);
   });
+
+  test("order varies between rounds", () => {
+    const rounds = Array.from({ length: 20 }, () => [bag.next(), bag.next(), bag.next()].join(","));
+    const uniqueOrders = new Set(rounds);
+    expect(uniqueOrders.size).to.be.greaterThan(1);
+  });
 });
